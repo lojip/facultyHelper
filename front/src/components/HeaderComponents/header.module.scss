@@ -1,0 +1,123 @@
+.header {
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+}
+
+.wrapper {
+    background-color: #eacccb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 1rem;
+    box-shadow: 0 4px 8px rgba(90, 63, 63, 0.2);
+
+    li {
+        border: none;
+        user-select: none;
+    }
+
+}
+
+.menu {
+    .burgerIcon {
+        position: fixed;
+        top: .84rem;
+        right: 1rem;
+        z-index: 101;
+        cursor: pointer;
+
+        .bar {
+            border-radius: 10%;
+            width: 2rem;
+            height: .2rem;
+            background-color: #000;
+            margin: .4rem 0;
+            transition: transform .3s ease-out, scale .2s linear;
+        }
+
+        .openIcon {
+            transform: translateY(.56rem) rotate(45deg);
+            border-radius: 1rem;
+
+            &:nth-child(2) {
+                transform: scale(0);
+            }
+
+            &:nth-child(3) {
+                transform: translateY(-.56rem) rotate(-45deg);
+            }
+
+        }
+    }
+
+    .burgerMenu {
+        position: absolute;
+        top: -1.8rem;
+        right: -12rem;
+        z-index: 100;
+        width: 12rem;
+        height: calc(100vh + 60px);
+        background: rgba(234, 204, 203, .5);
+        transition: all .3s ease-in-out;
+    }
+
+    .openMenu {
+        right: 0;
+    }
+}
+
+.menuItems {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    div {
+        width: 100%;
+    }
+
+    li {
+        width: 100%;
+        height: 3rem;
+        transition: all .2s ease-out;
+
+        &:hover {
+            background: rgb(234, 204, 203);
+        }
+    }
+}
+
+.menuItem {
+    height: 3rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff8080;
+    transition: all .2s linear .1s;
+    width: 100%;
+    text-decoration: none;
+
+
+    &:hover {
+        color: #000;
+    }
+}

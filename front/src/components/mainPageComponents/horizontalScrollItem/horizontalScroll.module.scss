@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+.bannerWrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.textContent {
+    display: flex;
+    animation: swipe 10s linear infinite;
+}
+
+@keyframes swipe {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+.textContentRight {
+    display: flex;
+    animation: swipeRight 10s linear infinite;
+}
+
+.text {
+    user-select: none;
+    font-size: 3rem;
+    padding: 0 .3rem;
+    font-family: "Karla", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+
+
+@keyframes swipeRight {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
