@@ -121,3 +121,29 @@
         color: #000;
     }
 }
+
+
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        img {
+            width: 250px;
+        }
+    }
+
+    .burgerMenu {
+        width: 10rem !important;
+    }
+
+    .menuItem {
+        font-size: 1rem !important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .wrapper {
+        img {
+            width: 200px;
+        }
+    }
+}

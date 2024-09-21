@@ -24,7 +24,7 @@ export const Result = ({ result, setIsResult, setProcentBar, setQuestions, setSt
 						</a>
 						<Link href={`/quiz`}
 							className={styles.containerButtonLink}>
-							Пройти другие тесты
+							Другие тесты
 						</Link>
 					</div>
 				</div>

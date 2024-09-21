@@ -76,3 +76,24 @@
 .horizontalScroll {
     padding: 5vh 0;
 }
+
+@media screen and (max-width: 640px) {
+    .wrapper {
+        h1 {
+            font-size: 4rem;
+        }
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        h1 {
+            font-size: 3.2rem;
+        }
+    }
+
+    .typedText {
+        font-size: 1.7rem !important;
+    }
+}

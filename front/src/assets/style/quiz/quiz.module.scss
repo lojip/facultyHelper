@@ -21,7 +21,6 @@
 }
 
 .sectionVuzItem {
-	margin-top: 3rem;
 	margin-bottom: 1rem;
 	border-radius: 2rem;
 	background-color: #eacccb;
@@ -65,7 +64,6 @@
 
 				a {
 					font-family: "Comfortaa", sans-serif;
-					margin: 0 0 0 1rem;
 					cursor: pointer;
 					user-select: none;
 					background-color: #ff7f7f;
@@ -187,6 +185,7 @@
 
 
 .containerButton {
+	gap: 1rem;
 	margin-top: 2rem;
 	width: 100%;
 	display: flex;
@@ -194,7 +193,6 @@
 
 	.containerButtonLink {
 		font-family: "Comfortaa", sans-serif;
-		margin: 0 0 0 1rem;
 		cursor: pointer;
 		text-decoration: none;
 		user-select: none;
@@ -224,7 +222,194 @@
 // result 
 
 .qestionIsResult {
+	margin-top: 1rem;
 	font-size: 1.5rem;
-	margin-bottom: 3rem;
 	text-align: center;
+}
+
+
+
+
+@media screen and (max-width: 1200px) {
+	.container {
+		width: 900px;
+	}
+}
+
+
+@media screen and (max-width: 1000px) {
+	.container {
+		width: 800px;
+
+		.qestionIsResult {
+			h1 {
+				font-size: 2rem !important;
+			}
+		}
+	}
+
+	.wrapper {
+		h2 {
+			font-size: 25px !important;
+		}
+	}
+
+	.containerNewQuiz {
+		min-height: 14rem;
+	}
+
+	.sectionVuzItem {
+		margin: 1rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.containerQuiz {
+		.qestionHeader {
+			font-size: 1.5rem !important;
+		}
+	}
+
+
+	.container {
+		width: 720px;
+
+		.qestionHeaderResult {
+			font-size: 1.4rem;
+		}
+
+		.qestionIsResult {
+			h1 {
+				font-size: 1.7rem !important;
+			}
+		}
+	}
+
+	.containerNewQuiz {
+		min-height: 12rem;
+	}
+
+	.sectionVuzItem {
+		margin: 2rem;
+
+		.description {
+
+			h2,
+			p {
+				font-size: 18px !important;
+			}
+		}
+
+		.logo {
+			img {
+				width: 150px;
+				height: 150px;
+				border-radius: 1rem 0 1rem 0;
+			}
+		}
+
+		.containerButton {
+			margin-top: 1rem;
+
+			.containerButtonLink {
+				padding: .8rem 2rem !important;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.container {
+		width: 600px;
+
+		.containerButtonLink {
+			padding: 1rem 1.5rem;
+		}
+
+		.qestionHeaderResult {
+			font-size: 1.2rem;
+		}
+
+		.qestionIsResult {
+			h1 {
+				font-size: 1.5rem !important;
+			}
+		}
+
+
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.containerQuiz {
+		.ul {
+			font-size: 14px;
+		}
+
+		.qestionHeader {
+			font-size: 1rem !important;
+		}
+	}
+
+	.container {
+		width: 100%;
+		padding: 0 10px;
+
+		.containerButtonLink {
+			padding: 1rem 1.3rem;
+		}
+	}
+
+	.containerNewQuiz {
+		min-height: 12rem;
+		flex-direction: column;
+	}
+
+	.sectionVuzItem {
+		margin: 1rem;
+
+		.description {
+
+			h2,
+			p {
+				font-size: 16px !important;
+			}
+		}
+
+		.logo {
+			img {
+				display: none;
+			}
+		}
+
+		.containerButton {
+			margin-top: .8rem;
+
+			.containerButtonLink {
+				padding: .8rem 2rem !important;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.container {
+		width: 100%;
+		padding: 0 5px;
+
+		.containerButtonLink {
+			width: 8rem;
+			padding: .7rem 1rem;
+		}
+
+		.qestionHeaderResult {
+			font-size: 1rem;
+		}
+
+		.qestionIsResult {
+			h1 {
+				font-size: 1.2rem !important;
+			}
+		}
+	}
 }

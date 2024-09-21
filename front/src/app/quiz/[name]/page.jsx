@@ -62,7 +62,7 @@ export default function QuizPage() {
 		{ num: 5, text: 'Очень подходит, сильно', custom: 1 },
 		{ num: 4, text: "Подходит, нормально", custom: 2 },
 		{ num: 3, text: "Средне(ние)", custom: 3 },
-		{ num: 2, text: "Не подходит, чуть ниже среднего", custom: 4 },
+		{ num: 2, text: "Не подходит, ниже среднего", custom: 4 },
 		{ num: 1, text: 'Вообще не подходит, плохо', custom: 5 }
 	];
 
