@@ -9,5 +9,13 @@ html {
 }
 
 body {
+  font-size: 18px;
   background-color: #F1F4EC;
+  overscroll-behavior: none;
+}
+
+@media screen and (max-width: 1000px) {
+  body {
+    font-size: 16px;
+  }
 }

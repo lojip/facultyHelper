@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useRef, useEffect } from 'react';
 import { ReactTyped } from 'react-typed';
 import styles from '../../../assets/style/main/main.module.scss'
@@ -32,7 +34,7 @@ const typedText = () => {
 					{isVisible && (
 						<ReactTyped
 							strings={[
-								"Найди свою идеальную кафедру без стресса.",
+								"Найди свой идеальный профиль без стресса.",
 								"Открой свои возможности – начни с правильного выбора.",
 								"Твой путь к успешной карьере начинается здесь!"
 							]}

@@ -2,7 +2,7 @@
 
 import styles from '../header.module.scss';
 import Image from 'next/image';
-import BurgerMenu from '../burgerMenu/burgerMenu';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -38,14 +38,26 @@ export default function header() {
     }
   }, [pathname]);
 
+  const handleClick = (e, href) => {
+    if (href === pathname) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <div>
       {/* Добавляем условный класс для видимости шапки */}
       <header className={`${styles.header} ${isVisible ? styles.visible : ''}`}>
         <div className={styles.wrapper}>
-          <Image src="/logo.svg" alt="logo" width={360} height={40} priority />
+          <Image src="/logo.svg" alt="logo" width={360} height={40} className={styles.logoFavicon} priority />
 
-          <BurgerMenu isMain={false} />
+          <nav>
+            <ul>
+              <li onClick={handleClick('/')}>
+                <Link href="/">Главная</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </header>
     </div>

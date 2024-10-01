@@ -47,6 +47,7 @@ def get_all_faculties_KSU():
 @app.route('/collectionOnName', methods = ['GET'])
 def get_all_collectionsName():
     name = request.args.get('nameColl')
+    print(name)
     db_coll = db[name]
     try:
         names = list(db_coll.find({}, {'_id': 0}))

@@ -1,5 +1,9 @@
 import styles from '../../../assets/style/main/main.module.scss'
 import Link from 'next/link'
+import { motion } from 'framer-motion';
+
+
+
 
 const staticText = () => {
 	return (

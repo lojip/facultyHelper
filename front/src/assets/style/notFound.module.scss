@@ -1,11 +1,14 @@
-.main{
-    height: calc(100vh - 60px);
+.main {
+    background-image: url('/fone.jpg');
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    h1{
+    h1 {
         font-size: 15rem;
     }
 }

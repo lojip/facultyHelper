@@ -2,7 +2,6 @@ import { Ubuntu } from "next/font/google";
 import Header from '@/components/HeaderComponents/header/header';
 import '../assets/style/globals.scss'
 import ScrollToTop from "@/components/scrollToTop/scrollToTop.jsx";
-
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ['700'] });
 
 export const metadata = {

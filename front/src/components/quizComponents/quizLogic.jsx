@@ -1,77 +1,57 @@
-const PROCENT_MAX = 80.0;
+import { selectRandomQuestion } from './selectRandomQuestion.jsx'
+import { addToLocalStorage, removeFromLocalStorage, getFromLocalStorage } from './localStorageLogic.jsx';
 
+const PERCENT_MAX = 80.0;
+let MAX_LENGTH_QUESTIONS;
 
 export const startQuiz = (setQuestions, fetchData) => {
-	// Проверка наличия данных о факультетах
+	// Проверка наличия данных о профилях
 	if (!fetchData) {
 		console.error('Faculties data is not available.');
 		return;
 	}
 
+	MAX_LENGTH_QUESTIONS = fetchData[0].questions.length + 1;
+
 	// Сохраняем факультеты в localStorage
-	localStorage.setItem('faculties', JSON.stringify(fetchData));
-
-	// Получаем все вопросы из всех факультетов
-	const allQuestions = fetchData.reduce((acc, faculty) => {
-		return [...acc, ...faculty.questions];
-	}, []);
-
-	// Удаляем дубликаты из массива вопросов
-	const uniqueQuestions = [...new Set(allQuestions.map(q => JSON.stringify(q)))].map(q => JSON.parse(q));
-
-	selectRandomQuestion(uniqueQuestions, setQuestions);
+	addToLocalStorage('faculties', fetchData)
+	selectRandomQuestion(setQuestions);
 };
 
-const selectRandomQuestion = (questions, setQuestions) => {
-	if (questions.length === 0) return;
 
-	const randomIndex = Math.floor(Math.random() * questions.length);
-	const newQuestion = questions[randomIndex];
-	setQuestions(newQuestion);
+const checkQuestion = (numberQuestion, setPercent) => {
+	// Получаем данные из localStorage
+	const faculties = getFromLocalStorage('faculties');
+	const removedFaculties = getFromLocalStorage('removedFaculties');
 
-	// Удаление выбранного вопроса из списка
-	const updatedQuestions = questions.filter((_, index) => index !== randomIndex);
-	localStorage.setItem('uniqueQuestions', JSON.stringify(updatedQuestions));
-};
+	faculties.forEach(faculty => {
+		// Ищем кафедру с тем же id в removedFacultiesData
+		const removedFaculty = removedFaculties.find(removed => removed.department === faculty.department);
 
-const checkQuestion = (question, numberQuestion, setProcent) => {
-	// Получаем факультеты из localStorage
-	let facultiesData = localStorage.getItem('faculties');
-	if (!facultiesData) {
-		console.error('Faculties data is not available in localStorage.');
-		return;
-	}
-	facultiesData = JSON.parse(facultiesData);
-
-	facultiesData.forEach((faculty) => {
-		faculty.questions.forEach((q) => {
-			if (q === question) {
-				faculty.percent += Math.ceil((100 / faculty.questions.length) / 2 * numberQuestion);
-			}
-		});
+		// Если кафедра найдена, изменяем один из параметров
+		if (removedFaculty) {
+			faculty.percent += Math.ceil((100 / (MAX_LENGTH_QUESTIONS)) / 4 * numberQuestion);
+		}
 	});
 
 	// Обновляем данные факультетов в localStorage
-	localStorage.setItem('faculties', JSON.stringify(facultiesData));
-	findFavoriteDish(setProcent);
+	addToLocalStorage('faculties', faculties)
+	findFavoriteDish(setPercent);
 };
 
 
-// Проверка на завершение 
-const examinationQuestion = (setResult, setIsResult, setProcent) => {
-	let facultiesData = localStorage.getItem('faculties');
-	if (!facultiesData) {
-		console.error('Faculties data is not available in localStorage.');
-		return;
-	}
-	facultiesData = JSON.parse(facultiesData);
-	facultiesData = facultiesData.sort((a, b) => b.percent - a.percent);
-	localStorage.setItem('faculties', JSON.stringify(facultiesData));
 
+// Проверка на завершение 
+const examinationQuestion = (setResult, setIsResult, setPercent) => {
+	let facultiesData = getFromLocalStorage('faculties');
+
+	facultiesData = facultiesData.sort((a, b) => b.percent - a.percent);
+	addToLocalStorage('faculties', facultiesData)
 
 	for (const faculty of facultiesData) {
-		if (faculty.percent >= PROCENT_MAX) {
-			setProcent(100);
+		if (faculty.percent >= PERCENT_MAX) {
+			setPercent(100);
+			removeFromLocalStorage('removedFaculties')
 			setTimeout(() => {
 				setResult(`${faculty.department}`);
 				setIsResult(true)
@@ -80,39 +60,35 @@ const examinationQuestion = (setResult, setIsResult, setProcent) => {
 	}
 };
 
+
+
 // Новый вопрос
-export const newQuestion = (setQuestions, numberQuestion, question, setProcent, setResult, setIsResult) => {
-	const uniqueQuestions = localStorage.getItem('uniqueQuestions');
-	if (uniqueQuestions) {
-		const parsedQuestions = JSON.parse(uniqueQuestions);
-		checkQuestion(question, numberQuestion, setProcent);
-		examinationQuestion(setResult, setIsResult, setProcent);
-		selectRandomQuestion(parsedQuestions, setQuestions);
-	}
+export const newQuestion = (numberQuestion, data) => {
+	checkQuestion(numberQuestion, data.setPercentBar);
+	examinationQuestion(data.setResult, data.setIsResult, data.setPercentBar);
+	selectRandomQuestion(data.setQuestions);
 };
 
-// Прогресс бар
-export const findFavoriteDish = (setProcent) => {
-	let facultiesData = localStorage.getItem('faculties');
-	if (!facultiesData) {
-		console.error('Faculties data is not available in localStorage.');
-		return;
-	}
-	facultiesData = JSON.parse(facultiesData);
 
+
+// Прогресс бар
+const findFavoriteDish = (setPercent) => {
+	const facultiesData = getFromLocalStorage('faculties')
 	const favoriteDish = facultiesData.reduce((maxDish, currentDish) => {
 		return currentDish.percent > maxDish.percent ? currentDish : maxDish;
 	});
 
 	console.log(favoriteDish.percent);
-	setProcent(favoriteDish.percent);
+	setPercent(favoriteDish.percent);
 };
 
+
+
 // попробовать снова
-export const newQuizFull = (setIsResult, setProcent, setQuestions, setStartNewQuiz, data) => {
-	localStorage.setItem('faculties', JSON.stringify(data));
+export const newQuizFull = (setIsResult, setPercent, setQuestions, data) => {
+	addToLocalStorage('faculties', data)
 	setIsResult(false);
-	setProcent(0);
+	setPercent(0);
 	setQuestions('');
 	startQuiz(setQuestions, data);
 };
