@@ -1,44 +1,27 @@
 import { selectRandomQuestion } from './selectRandomQuestion.jsx'
 import { addToLocalStorage, removeFromLocalStorage, getFromLocalStorage } from './localStorageLogic.jsx';
+import { checkQuestion } from './checkQuestion.jsx';
 
 const PERCENT_MAX = 80.0;
 let MAX_LENGTH_QUESTIONS;
 
 export const startQuiz = (setQuestions, fetchData) => {
+	// Обнуляем локальное хранилище
+	removeFromLocalStorage('removedFaculties')
+
 	// Проверка наличия данных о профилях
 	if (!fetchData) {
 		console.error('Faculties data is not available.');
 		return;
 	}
 
-	MAX_LENGTH_QUESTIONS = fetchData[0].questions.length + 1;
+	MAX_LENGTH_QUESTIONS = fetchData[0].questions.length;
 
 	// Сохраняем факультеты в localStorage
+
 	addToLocalStorage('faculties', fetchData)
 	selectRandomQuestion(setQuestions);
 };
-
-
-const checkQuestion = (numberQuestion, setPercent) => {
-	// Получаем данные из localStorage
-	const faculties = getFromLocalStorage('faculties');
-	const removedFaculties = getFromLocalStorage('removedFaculties');
-
-	faculties.forEach(faculty => {
-		// Ищем кафедру с тем же id в removedFacultiesData
-		const removedFaculty = removedFaculties.find(removed => removed.department === faculty.department);
-
-		// Если кафедра найдена, изменяем один из параметров
-		if (removedFaculty) {
-			faculty.percent += Math.ceil((100 / (MAX_LENGTH_QUESTIONS)) / 4 * numberQuestion);
-		}
-	});
-
-	// Обновляем данные факультетов в localStorage
-	addToLocalStorage('faculties', faculties)
-	findFavoriteDish(setPercent);
-};
-
 
 
 // Проверка на завершение 
@@ -60,28 +43,12 @@ const examinationQuestion = (setResult, setIsResult, setPercent) => {
 	}
 };
 
-
-
 // Новый вопрос
 export const newQuestion = (numberQuestion, data) => {
-	checkQuestion(numberQuestion, data.setPercentBar);
+	checkQuestion(numberQuestion, data.setPercentBar, MAX_LENGTH_QUESTIONS);
 	examinationQuestion(data.setResult, data.setIsResult, data.setPercentBar);
-	selectRandomQuestion(data.setQuestions);
+	selectRandomQuestion(data.setQuestions, MAX_LENGTH_QUESTIONS);
 };
-
-
-
-// Прогресс бар
-const findFavoriteDish = (setPercent) => {
-	const facultiesData = getFromLocalStorage('faculties')
-	const favoriteDish = facultiesData.reduce((maxDish, currentDish) => {
-		return currentDish.percent > maxDish.percent ? currentDish : maxDish;
-	});
-
-	console.log(favoriteDish.percent);
-	setPercent(favoriteDish.percent);
-};
-
 
 
 // попробовать снова

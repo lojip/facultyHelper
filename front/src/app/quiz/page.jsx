@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import styles from '../../assets/style/quiz/quiz.module.scss';
 import Spinner from '@/components/spinner/spinner';
 import NotFound from '@/app/not-found';
-import { startQuiz, newQuestion } from '@/components/quizComponents/quizLogic';
+import { startQuiz, newQuestion } from '@/components/quizComponents/QuizLogic/quizLogic.jsx';
 import { Result } from './result.jsx';
-import { updatingThePage, handleOptionClick } from '@/components/quizComponents/uiLogic';
+import { updatingThePage, handleOptionClick } from '@/components/quizComponents/uiLogic.jsx';
 import { fetchUrl } from '@/components/fetchComponents/fetchComponent.jsx';
 import { AnimatePresence, motion } from 'framer-motion';
 

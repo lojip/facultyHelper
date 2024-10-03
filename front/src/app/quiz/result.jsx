@@ -1,5 +1,5 @@
 import styles from '../../assets/style/quiz/quiz.module.scss';
-import { newQuizFull } from '../../components/quizComponents/quizLogic.jsx'
+import { newQuizFull } from '../../components/quizComponents/QuizLogic/quizLogic.jsx'
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 

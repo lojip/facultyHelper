@@ -12,3 +12,30 @@
         font-size: 15rem;
     }
 }
+
+
+@media screen and (max-width: 1000px) {
+    .main {
+        h1 {
+            font-size: 12rem;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .main {
+        h1 {
+            font-size: 10rem;
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .main {
+        h1 {
+            font-size: 8rem;
+        }
+    }
+}

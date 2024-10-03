@@ -10,8 +10,7 @@ export const getFromLocalStorage = (key) => {
 	const data = localStorage.getItem(`${key}`);
 
 	if (!data) {
-		console.error('Faculties data is not available in localStorage.');
-		return;
+		return [];
 	}
 
 	return JSON.parse(data);
