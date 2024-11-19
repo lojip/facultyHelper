@@ -20,6 +20,7 @@ export const Result = ({ result, setIsResult, setPercentBar, setQuestions, data 
 					</div>
 					<div className={styles.qestionIsResult}>
 						<h1>{result}</h1>
+						<p>Пожалуйста, пройдите небольшой <a href="https://forms.yandex.ru/u/673ce7fd2530c27241163bf9/" target='_blank'>опрос</a></p>
 					</div>
 					<div className={styles.containerButton}>
 						<a

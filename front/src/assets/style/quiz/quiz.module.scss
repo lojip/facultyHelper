@@ -238,10 +238,26 @@
 // result 
 
 .qestionIsResult {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
 	font-family: Comfortaa, sans-serif;
 	margin-top: 1rem;
 	font-size: 1.5rem;
 	text-align: center;
+
+	p {
+		font-size: 1.3rem;
+	}
+
+	a {
+		color: #3db2dc;
+		transition: color .3s linear;
+
+		&:hover {
+			color: #264855;
+		}
+	}
 }
 
 
@@ -261,6 +277,10 @@
 		.qestionIsResult {
 			h1 {
 				font-size: 2rem !important;
+			}
+
+			p {
+				font-size: 1rem;
 			}
 		}
 	}
